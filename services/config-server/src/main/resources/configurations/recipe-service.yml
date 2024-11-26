@@ -1,0 +1,20 @@
+server:
+  port: 8040
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3304/recipe-database
+    username: pet-food-recipe-user
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    defer-datasource-initialization: true
+
+application:
+  config:
+    user-url: http://localhost:8010/v1/users
+    pet-url: http://localhost:8020/v1/users
+    ingredient-url: http://localhost:8030/v1/ingredients

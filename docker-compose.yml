@@ -1,0 +1,78 @@
+services:
+  user-mysql:
+    container_name: user-mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: pet-food-recipe-user
+      MYSQL_PASSWORD: mysql
+      MYSQL_DATABASE: user-database
+    ports:
+      - "3301:3306"
+    volumes:
+      - user-db:/var/lib/mysql
+    networks:
+      - pet-food-recipe-network
+
+  pet-mysql:
+    container_name: pet-mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: pet-food-recipe-user
+      MYSQL_PASSWORD: mysql
+      MYSQL_DATABASE: pet-database
+    ports:
+      - "3302:3306"
+    volumes:
+      - pet-db:/var/lib/mysql
+    networks:
+      - pet-food-recipe-network
+
+  ingredient-mysql:
+    container_name: ingredient-mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: pet-food-recipe-user
+      MYSQL_PASSWORD: mysql
+      MYSQL_DATABASE: ingredient-database
+    ports:
+      - "3303:3306"
+    volumes:
+      - ingredient-db:/var/lib/mysql
+    networks:
+      - pet-food-recipe-network
+
+  recipe-mysql:
+    container_name: recipe-mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: pet-food-recipe-user
+      MYSQL_PASSWORD: mysql
+      MYSQL_DATABASE: recipe-database
+    ports:
+      - "3304:3306"
+    volumes:
+      - recipe-db:/var/lib/mysql
+    networks:
+      - pet-food-recipe-network
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+
+volumes:
+  user-db:
+  pet-db:
+  ingredient-db:
+  recipe-db:
+
+networks:
+  pet-food-recipe-network:
+    driver: bridge
